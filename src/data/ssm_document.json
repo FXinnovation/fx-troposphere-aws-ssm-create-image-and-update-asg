@@ -1,0 +1,60 @@
+{
+   "description": "Systems Manager Automation - Create AMI and Update ASG",
+   "schemaVersion": "0.3",
+   "parameters": {
+      "InstanceId": {
+         "type": "String",
+         "description": "(Required) The ID of the Amazon EC2 instance."
+      },
+      "targetASG": {
+         "type": "String",
+         "description": "(Required) Autoscaling group to Update"
+      },
+      "NoReboot": {
+         "type": "Boolean",
+         "description": "(Optional) Do not reboot the instance before creating the image.",
+         "default": true
+      },
+      "AutomationAssumeRole": {
+         "type": "String",
+         "description": "(Optional) The ARN of the role that allows Automation to perform the actions on your behalf. ",
+         "default": ""
+      }
+   },
+   "mainSteps": [
+      {
+         "name": "create_image",
+         "action": "aws:executeAutomation",
+         "maxAttempts": 3,
+         "timeoutSeconds": 3600,
+         "onFailure": "Abort",
+         "inputs": {
+            "DocumentName": "AWS-CreateImage",
+            "RuntimeParameters": {
+               "InstanceId": "{{ InstanceId }}",
+               "NoReboot": "{{ NoReboot }}",
+               "AutomationAssumeRole": "{{ AutomationAssumeRole }}"
+            }
+         }
+      },
+      {
+         "name": "update_asg",
+         "action": "aws:executeAutomation",
+         "maxAttempts": 3,
+         "timeoutSeconds": 3600,
+         "onFailure": "Abort",
+         "inputs": {
+            "DocumentName": "PLACEHOLDER, should be modified",
+            "RuntimeParameters": {
+               "NewAmiID": "{{ create_image.Output }}",
+               "targetASG": "{{ targetASG }}"
+            }
+         }
+
+      }
+
+   ],
+   "outputs": [
+       "{{ create_image.Output }}"
+   ]
+}

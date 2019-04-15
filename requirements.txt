@@ -1,0 +1,6 @@
+troposphere
+boto3
+moto
+xmlrunner
+pylint
+pyflakes
