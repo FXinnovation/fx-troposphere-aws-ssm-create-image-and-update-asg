@@ -81,6 +81,12 @@ class CloudFormationTestCase(unittest.TestCase):
             True
         )
 
-
-if __name__ == '__main__':
-    unittest.main()
+    def test_cloudformation_should_not_contain_ec2_instance(self):
+        """
+        Load CloudFormation  template generated and makes sure there is a
+        IAM role configured
+        """
+        self.assertEqual(
+            find_ressource_type('AWS::EC2::Instance'),
+            False
+        )
