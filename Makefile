@@ -23,8 +23,9 @@ lint:
 	pylint tests/*.py
 
 coverage:
-	coverage run -a src/__init__.py
-	coverage run -a src/main.py
+	coverage run -a --omit */virtualenv/* src/__init__.py
+	coverage run -a --omit */virtualenv/* src/main.py
+	coverage run -a --omit */virtualenv/* tests
 
 build:
 	( \
