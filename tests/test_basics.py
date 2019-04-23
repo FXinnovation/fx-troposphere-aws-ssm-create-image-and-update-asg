@@ -7,7 +7,7 @@ import unittest
 from src import main
 
 
-class CloudFormationTestCase(unittest.TestCase):
+class BasicTestCase(unittest.TestCase):
     """
     CloudFormation Test Cases
     """
@@ -16,7 +16,6 @@ class CloudFormationTestCase(unittest.TestCase):
         setUp will run before execution of each test case
         main.main() will generate the CloudFormation File
         """
-        main.main()
 
     def test_not_getting_a_version(self):
         """
