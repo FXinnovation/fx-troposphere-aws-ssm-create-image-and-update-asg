@@ -50,7 +50,7 @@ def main():
                 'ssm parameter that contains the name of the document',
                 ' for UpdateASG'
             ]),
-            Default='/Documents/SSM/UpdateASG'
+            Default='/Documents/SSM/update_asg/Name'
         )
     )
 

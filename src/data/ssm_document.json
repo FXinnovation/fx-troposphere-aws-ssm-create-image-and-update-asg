@@ -23,7 +23,7 @@
    },
    "mainSteps": [
       {
-         "name": "create_image",
+         "name": "createImage",
          "action": "aws:executeAutomation",
          "maxAttempts": 3,
          "timeoutSeconds": 3600,
@@ -38,7 +38,7 @@
          }
       },
       {
-         "name": "update_asg",
+         "name": "updateASG",
          "action": "aws:executeAutomation",
          "maxAttempts": 3,
          "timeoutSeconds": 3600,
@@ -46,15 +46,12 @@
          "inputs": {
             "DocumentName": "PLACEHOLDER, should be modified",
             "RuntimeParameters": {
-               "NewAmiID": "{{ create_image.Output }}",
+               "NewAmiID": "{{ createImage.Output }}",
                "targetASG": "{{ targetASG }}"
             }
          }
 
       }
 
-   ],
-   "outputs": [
-       "{{ create_image.Output }}"
    ]
 }
