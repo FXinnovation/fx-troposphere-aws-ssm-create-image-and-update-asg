@@ -1,6 +1,9 @@
 # -*- coding: utf-8 -*-
 
 from setuptools import setup, find_packages
+import re
+import codecs
+from os import path
 
 
 with open('README.md') as f:
@@ -9,9 +12,30 @@ with open('README.md') as f:
 with open('LICENSE') as f:
     license = f.read()
 
+
+def read(*parts):
+    """Reads a relative file and returns the content"""
+    with codecs.open(
+            path.join(
+                path.abspath(path.dirname(__file__)),
+                *parts
+            ), 'r') as fp:
+        return fp.read()
+
+
+def find_version(*file_paths):
+    """Retrieves the __version__ value from the package"""
+    version_file = read(*file_paths)
+    version_match = re.search(r"^__version__ = ['\"]([^'\"]*)['\"]",
+                              version_file, re.M)
+    if version_match:
+        return version_match.group(1)
+    raise RuntimeError("Unable to find version string.")
+
+
 setup(
     name='create-image-and-update-asg',
-    version='0.1.0',
+    version=find_version('src', '__init__.py'),
     description=' '.join([
         'Crates an image and Updates the AMI used for an AutoScaling Group in',
         'Amazon, using Systems Manager.'

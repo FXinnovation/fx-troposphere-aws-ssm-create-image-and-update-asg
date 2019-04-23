@@ -40,7 +40,7 @@ def find_ressource_type(ressource_type):
 
 class CloudFormationTestCase(unittest.TestCase):
     """
-    Lambda Test Cases
+    CloudFormation Test Cases
     """
     def setUp(self):
         """
