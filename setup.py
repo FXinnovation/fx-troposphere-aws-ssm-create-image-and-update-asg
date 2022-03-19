@@ -44,8 +44,8 @@ setup(
     author='Pascal Clermont',
     author_email='pascal.clermont@fxinnovation.com',
     url=''.join([
-        'https://scm.dazzlingwrench.fxinnovation.com/fxinnovation-private/',
-        'troposphere-aws-ssm-create-image-and-update-asg.git'
+        'https://github.com/FXinnovation/',
+        'fx-troposphere-aws-ssm-create-image-and-update-asg.git'
                  ]),
     license=license,
     packages=find_packages(exclude=('tests', 'docs'))
